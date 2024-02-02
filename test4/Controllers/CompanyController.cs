@@ -23,8 +23,8 @@ namespace test4.Controllers
         }
 
         // GET: api/company/5
-        [HttpGet("{companyName}", Name = "GetCompanyname")]
-        public ActionResult<Company> GetCompanyByName(string companyName)
+        [HttpGet("GetCompanyname")]
+        public ActionResult<Company> GetCompanyByName([FromQuery]string companyName)
         {
             return _apiDBContext.Company.FirstOrDefault(c => c.CompanyName == companyName);
         }

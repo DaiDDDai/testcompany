@@ -22,7 +22,7 @@ namespace test4.Controllers
         }
 
         // GET api/<MemberController>/5
-        [HttpGet("{Name}",Name ="Name")]
+        [HttpGet("Name")]
         public ActionResult<Member>GetName(string Name)
         {
             return _apiDBContext.Member.FirstOrDefault(c => c.Name == Name);

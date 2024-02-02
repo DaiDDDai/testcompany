@@ -19,7 +19,7 @@ namespace test4.Controllers
         }
         // GET: api/<SearchController>
         [HttpGet("member")]
-        public ActionResult<MemberDto> GetMembersInCompany(string CompanyName)
+        public ActionResult<MemberDto> GetMembersInCompany([FromQuery] string CompanyName)
         {
             var MembersInCompany = _apiDBContext.Member
               .Where(m => m.Company.CompanyName == CompanyName)

@@ -19,7 +19,7 @@ namespace test4.Controllers
         }
         // GET: api/<SearchController>
         [HttpGet("shoppinglist")]
-        public ActionResult<ShoppingListDto> GetSoppingListInMember(string MemberName)
+        public ActionResult<ShoppingListDto> GetSoppingListInMember([FromQuery] string MemberName)
         {
             var SoppingListInMember = _apiDBContext.SoppingList
               .Where(m => m.member.Name == MemberName)
