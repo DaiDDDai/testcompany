@@ -18,7 +18,7 @@ namespace test4.Controllers
             _apiDBContext = apiDBContext;
         }
         // GET: api/<SearchController>
-        [HttpGet("member/{CompanyName}")]
+        [HttpGet("member")]
         public ActionResult<MemberDto> GetMembersInCompany(string CompanyName)
         {
             var MembersInCompany = _apiDBContext.Member
