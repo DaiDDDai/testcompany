@@ -21,15 +21,15 @@ namespace test4.Controllers
             return _apiDBContext.Member.ToList();
         }
 
-        // GET api/<MemberController>/5
-        [HttpGet("Name")]
-        public ActionResult<Member>GetName(string Name)
-        {
-            return _apiDBContext.Member.FirstOrDefault(c => c.Name == Name);
-        }
+        //// GET api/<MemberController>/5
+        //[HttpGet("Name")]
+        //public ActionResult<Member>GetName(string Name)
+        //{
+        //    return _apiDBContext.Member.FirstOrDefault(c => c.Name == Name);
+        //}
 
         // POST api/<MemberController>
-        [HttpPost]
+        [HttpPost("memberadd")]
         public IActionResult Post([FromBody] Member req)
         {
             try
@@ -49,7 +49,7 @@ namespace test4.Controllers
         }
 
         // POST api/member/DeleteItem/5
-        [HttpPost("DeleteItem/{id}")]
+        [HttpPost("DeleteItem")]
         public ActionResult Delete(int id)
         {
             var itemDelete = _apiDBContext.Member.FirstOrDefault(i => i.MemberId == id);

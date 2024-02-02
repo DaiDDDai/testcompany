@@ -18,26 +18,29 @@ namespace test4.Controllers
             _apiDBContext = apiDBContext;
         }
         // GET: api/<SearchController>
-        [HttpGet("member")]
+        [HttpGet("CompanyName")]
         public ActionResult<MemberDto> GetMembersInCompany([FromQuery] string CompanyName)
         {
-            var MembersInCompany = _apiDBContext.Member
-              .Where(m => m.Company.CompanyName == CompanyName)
-              .Select(m => new MemberDto
-              {
-                   MemberId = m.MemberId,
-                   Name = m.Name,
-                   PhoneNumber = m.PhoneNumber,
-                   Address = m.Address
-        })
-        .ToList();
+            var MembersInCompany = from member in _apiDBContext.Member
+                                   join company in _apiDBContext.Company
+                                   on member.CompanyID equals company.CompanyId
+                                   where company.CompanyName == CompanyName
+                                   select new MemberDto
+                                   {
+                                       MemberId = member.MemberId,
+                                       Name = member.Name,
+                                       PhoneNumber = member.PhoneNumber,
+                                       Address = member.Address
+                                   };
 
-            if (MembersInCompany == null)
+            var membersList = MembersInCompany.ToList();
+
+            if (membersList == null || membersList.Count == 0)
             {
                 return NotFound("找不到該公司或該公司沒有成員");
             }
 
-            return Ok(MembersInCompany);
+            return Ok(membersList);
         }
 
         // POST api/<SearchController>

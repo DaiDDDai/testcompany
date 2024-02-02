@@ -13,8 +13,6 @@ namespace test4.Models
 
         public int CompanyID { get; set; }
 
-        public Company Company { get; set; } // 导航属性
-        public List<SoppingList> SoppingLists { get; set; } // 另一端的导航属性
 
 
     }

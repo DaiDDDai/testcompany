@@ -22,15 +22,15 @@ namespace test4.Controllers
             return _apiDBContext.Company.ToList();
         }
 
-        // GET: api/company/5
-        [HttpGet("GetCompanyname")]
-        public ActionResult<Company> GetCompanyByName([FromQuery]string companyName)
-        {
-            return _apiDBContext.Company.FirstOrDefault(c => c.CompanyName == companyName);
-        }
+        //// GET: api/company/5
+        //[HttpGet("GetCompanyname")]
+        //public ActionResult<Company> GetCompanyByName([FromQuery]string companyName)
+        //{
+        //    return _apiDBContext.Company.FirstOrDefault(c => c.CompanyName == companyName);
+        //}
 
         // POST api/company
-        [HttpPost]
+        [HttpPost("companyadd")]
         public IActionResult Post([FromBody] Company obj)
         {
             if (obj == null)
@@ -44,7 +44,7 @@ namespace test4.Controllers
         }
 
         // POST api/company/DeleteItem/5
-        [HttpPost("DeleteItem/{id}")]
+        [HttpPost("DeleteItem")]
         public ActionResult Delete(int id)
         {
             var itemDelete = _apiDBContext.Company.FirstOrDefault(i => i.CompanyId == id);

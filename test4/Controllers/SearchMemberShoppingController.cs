@@ -18,26 +18,29 @@ namespace test4.Controllers
             _apiDBContext = apiDBContext;
         }
         // GET: api/<SearchController>
-        [HttpGet("shoppinglist")]
-        public ActionResult<ShoppingListDto> GetSoppingListInMember([FromQuery] string MemberName)
+        [HttpGet("MemberName")]
+        public ActionResult<ShoppingListDto> GetSoppingListInMember(string MemberName)
         {
-            var SoppingListInMember = _apiDBContext.SoppingList
-              .Where(m => m.member.Name == MemberName)
-              .Select(m => new ShoppingListDto
-              {
-                   SoppingListId = m.SoppingListId,
-                   Amount = m.Amount,
-                   Items = m.Items,
-                   Money = m.Money
-        })
-        .ToList();
+            var query = from member in _apiDBContext.Member
+                        join shoppingList in _apiDBContext.SoppingList
+                        on member.MemberId equals shoppingList.MemberID
+                        where member.Name == MemberName
+                        select new ShoppingListDto
+                        {
+                            SoppingListId = shoppingList.SoppingListId,
+                            Amount = shoppingList.Amount,
+                            Items = shoppingList.Items,
+                            Money = shoppingList.Money
+                        };
 
-            if (SoppingListInMember == null)
+            var result = query.ToList();
+
+            if (result == null)
             {
                 return NotFound("找不到該公司或該公司沒有成員");
             }
 
-            return Ok(SoppingListInMember);
+            return Ok(result);
         }
 
         // POST api/<SearchController>

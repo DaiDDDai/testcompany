@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using test4.Dto;
 
 namespace test4.Models
 {

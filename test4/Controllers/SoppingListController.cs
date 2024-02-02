@@ -22,15 +22,15 @@ namespace test4.Controllers
         }
 
 
-        // GET api/<SoppingController>/5
-        [HttpGet("{Items}")]
-        public ActionResult<SoppingList> GetItems(string obj)
-        {
-            return _apiDBContext.SoppingList.FirstOrDefault(c => c.Items == obj);
-        }
+        //// GET api/<SoppingController>/5
+        //[HttpGet("{Items}")]
+        //public ActionResult<SoppingList> GetItems(string obj)
+        //{
+        //    return _apiDBContext.SoppingList.FirstOrDefault(c => c.Items == obj);
+        //}
 
         // POST api/<SoppingController>
-        [HttpPost]
+        [HttpPost("Add")]
         public IActionResult Post([FromBody] SoppingList req)
         {
             if (req == null)
@@ -42,7 +42,7 @@ namespace test4.Controllers
             return Ok("新增成功！");
         }
         // POST api/SoppingList/DeleteItem/5
-        [HttpPost("DeleteItem/{id}")]
+        [HttpPost("DeleteItem")]
         public ActionResult Delete(int id)
         {
             var itemDelete = _apiDBContext.SoppingList.FirstOrDefault(i => i.SoppingListId == id);
