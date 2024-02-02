@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Linq;
+using test4.Dto;
 using test4.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -61,22 +62,25 @@ namespace test4.Controllers
         }
 
         [HttpPost("CompanyUpdate")]
-        public ActionResult Update(int id, [FromBody] Company updatemodel)
+        public ActionResult Update([FromBody] UpdateCompany updatemodel)
         {
-            var listudate = _apiDBContext.Company.FirstOrDefault(i => i.CompanyId == id);
+            var listupdate = _apiDBContext.Company.FirstOrDefault(i => i.CompanyId == updatemodel.CompanyId);
 
-            if (listudate == null)
+            if (listupdate == null)
             {
                 return NotFound(); // 資源不存在
             }
-            listudate.CompanyPhone = updatemodel.CompanyPhone;
-            listudate.CompanyName = updatemodel.CompanyName;
-            listudate.CompanyAddress = updatemodel.CompanyAddress;
+            
+            listupdate.CompanyPhone = updatemodel.CompanyPhone;
+            listupdate.CompanyName = updatemodel.CompanyName;
+            listupdate.CompanyAddress = updatemodel.CompanyAddress;
+
 
             _apiDBContext.SaveChanges();
 
             return NoContent(); // 成功刪除，回傳 204 No Content
         }
+
 
 
         // PUT api/<testController>/5

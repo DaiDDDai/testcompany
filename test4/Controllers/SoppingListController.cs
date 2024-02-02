@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using test4.Dto;
 using test4.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -59,14 +60,16 @@ namespace test4.Controllers
         }
 
         [HttpPost("ShoppingListUpdate")]
-        public ActionResult Update(int id, [FromBody] SoppingList updatemodel)
+        public ActionResult Update([FromBody] UpdateShoppingList updatemodel)
         {
-            var listudate = _apiDBContext.SoppingList.FirstOrDefault(i => i.SoppingListId == id);
+            var listudate = _apiDBContext.SoppingList.FirstOrDefault(i => i.SoppingListId == updatemodel.SoppingListId);
 
             if (listudate == null)
             {
                 return NotFound(); // 資源不存在
             }
+
+            listudate.SoppingListId = updatemodel.SoppingListId;
             listudate.Items = updatemodel.Items;
             listudate.Amount = updatemodel.Amount;
             listudate.Money = updatemodel.Money;
