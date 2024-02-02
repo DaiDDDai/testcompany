@@ -10,7 +10,7 @@ namespace test4.Models
         public string CompanyName { get; set; }
         public string CompanyPhone { get; set; }
         public string CompanyAddress { get; set; }
-        public List<Member> Member { get; set; } // 另一端的导航属性
+        public List<Member> Members { get; set; } // 另一端的导航属性
 
     }
 

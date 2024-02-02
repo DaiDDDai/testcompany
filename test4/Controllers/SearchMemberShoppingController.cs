@@ -9,34 +9,35 @@ namespace test4.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class SearchController : ControllerBase
+    public class SearchMemberShoppingController : ControllerBase
     {
         private readonly apiDBContext _apiDBContext;
 
-        public SearchController (apiDBContext apiDBContext)
+        public SearchMemberShoppingController(apiDBContext apiDBContext)
         {
             _apiDBContext = apiDBContext;
         }
         // GET: api/<SearchController>
-        [HttpGet("member/{companyName}")]
-        public ActionResult<SearchDto> GetMemberInCompany(string companyName)
+        [HttpGet("shoppinglist/{MemberName}")]
+        public ActionResult<ShoppingListDto> GetSoppingListInMember(string MemberName)
         {
-            var company = _apiDBContext.Company
-            .Include(c => c.Member)  // 在查询时包含 Company 实体的 Members 导航属性
-            .FirstOrDefault(c => c.CompanyName == companyName);
+            var SoppingListInMember = _apiDBContext.SoppingList
+              .Where(m => m.member.Name == MemberName)
+              .Select(m => new ShoppingListDto
+              {
+                   SoppingListId = m.SoppingListId,
+                   Amount = m.Amount,
+                   Items = m.Items,
+                   Money = m.Money
+        })
+        .ToList();
 
-            if (company == null)
+            if (SoppingListInMember == null)
             {
-                return NotFound("找不到該公司");
+                return NotFound("找不到該公司或該公司沒有成員");
             }
 
-            var SearchDto = new SearchDto
-            {
-                CompanyName = company.CompanyName,
-                MemberNames = company.Member.Select(m => m.Name).ToList()
-            };
-
-            return Ok(SearchDto);
+            return Ok(SoppingListInMember);
         }
 
         // POST api/<SearchController>
