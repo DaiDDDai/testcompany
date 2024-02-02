@@ -29,7 +29,7 @@ namespace test4.Controllers
         //}
 
         // POST api/<MemberController>
-        [HttpPost("memberadd")]
+        [HttpPost("MemberAdd")]
         public IActionResult Post([FromBody] Member req)
         {
             try
@@ -49,7 +49,7 @@ namespace test4.Controllers
         }
 
         // POST api/member/DeleteItem/5
-        [HttpPost("DeleteItem")]
+        [HttpPost("MemberDelete")]
         public ActionResult Delete(int id)
         {
             var itemDelete = _apiDBContext.Member.FirstOrDefault(i => i.MemberId == id);
@@ -60,6 +60,25 @@ namespace test4.Controllers
             }
 
             _apiDBContext.Member.Remove(itemDelete);
+            _apiDBContext.SaveChanges();
+
+            return NoContent(); // 成功刪除，回傳 204 No Content
+        }
+
+        [HttpPost("MemberUpdate")]
+        public ActionResult Update(int id, [FromBody] Member updatemodel)
+        {
+            var listudate = _apiDBContext.Member.FirstOrDefault(i => i.MemberId == id);
+
+            if (listudate == null)
+            {
+                return NotFound(); // 資源不存在
+            }
+            listudate.PhoneNumber = updatemodel.PhoneNumber;
+            listudate.Address = updatemodel.Address;
+            listudate.Name = updatemodel.Name;
+            listudate.CompanyID = updatemodel.CompanyID;
+
             _apiDBContext.SaveChanges();
 
             return NoContent(); // 成功刪除，回傳 204 No Content

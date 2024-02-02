@@ -30,7 +30,7 @@ namespace test4.Controllers
         //}
 
         // POST api/<SoppingController>
-        [HttpPost("Add")]
+        [HttpPost("ShoppingListAdd")]
         public IActionResult Post([FromBody] SoppingList req)
         {
             if (req == null)
@@ -42,7 +42,7 @@ namespace test4.Controllers
             return Ok("新增成功！");
         }
         // POST api/SoppingList/DeleteItem/5
-        [HttpPost("DeleteItem")]
+        [HttpPost("ShoppingListDeleteItem")]
         public ActionResult Delete(int id)
         {
             var itemDelete = _apiDBContext.SoppingList.FirstOrDefault(i => i.SoppingListId == id);
@@ -53,6 +53,25 @@ namespace test4.Controllers
             }
 
             _apiDBContext.SoppingList.Remove(itemDelete);
+            _apiDBContext.SaveChanges();
+
+            return NoContent(); // 成功刪除，回傳 204 No Content
+        }
+
+        [HttpPost("ShoppingListUpdate")]
+        public ActionResult Update(int id, [FromBody] SoppingList updatemodel)
+        {
+            var listudate = _apiDBContext.SoppingList.FirstOrDefault(i => i.SoppingListId == id);
+
+            if (listudate == null)
+            {
+                return NotFound(); // 資源不存在
+            }
+            listudate.Items = updatemodel.Items;
+            listudate.Amount = updatemodel.Amount;
+            listudate.Money = updatemodel.Money;
+            listudate.MemberID = updatemodel.MemberID;
+
             _apiDBContext.SaveChanges();
 
             return NoContent(); // 成功刪除，回傳 204 No Content

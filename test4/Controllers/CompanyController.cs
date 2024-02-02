@@ -30,7 +30,7 @@ namespace test4.Controllers
         //}
 
         // POST api/company
-        [HttpPost("companyadd")]
+        [HttpPost("CompanyAdd")]
         public IActionResult Post([FromBody] Company obj)
         {
             if (obj == null)
@@ -44,7 +44,7 @@ namespace test4.Controllers
         }
 
         // POST api/company/DeleteItem/5
-        [HttpPost("DeleteItem")]
+        [HttpPost("CompanyDelete")]
         public ActionResult Delete(int id)
         {
             var itemDelete = _apiDBContext.Company.FirstOrDefault(i => i.CompanyId == id);
@@ -55,6 +55,24 @@ namespace test4.Controllers
             }
 
             _apiDBContext.Company.Remove(itemDelete);
+            _apiDBContext.SaveChanges();
+
+            return NoContent(); // 成功刪除，回傳 204 No Content
+        }
+
+        [HttpPost("CompanyUpdate")]
+        public ActionResult Update(int id, [FromBody] Company updatemodel)
+        {
+            var listudate = _apiDBContext.Company.FirstOrDefault(i => i.CompanyId == id);
+
+            if (listudate == null)
+            {
+                return NotFound(); // 資源不存在
+            }
+            listudate.CompanyPhone = updatemodel.CompanyPhone;
+            listudate.CompanyName = updatemodel.CompanyName;
+            listudate.CompanyAddress = updatemodel.CompanyAddress;
+
             _apiDBContext.SaveChanges();
 
             return NoContent(); // 成功刪除，回傳 204 No Content
