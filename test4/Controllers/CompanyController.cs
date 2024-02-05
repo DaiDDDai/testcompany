@@ -71,10 +71,7 @@ namespace test4.Controllers
                 return NotFound(); // 資源不存在
             }
             
-            listupdate.CompanyPhone = updatemodel.CompanyPhone;
-            listupdate.CompanyName = updatemodel.CompanyName;
-            listupdate.CompanyAddress = updatemodel.CompanyAddress;
-
+            listupdate.Edit(updatemodel);
 
             _apiDBContext.SaveChanges();
 
