@@ -4,7 +4,6 @@ namespace test4.Dto
 {
     public class UpdateMember
     {
-        [Key]
         public int MemberId { get; set; }
         public string Name { get; set; }
         public string PhoneNumber { get; set; }

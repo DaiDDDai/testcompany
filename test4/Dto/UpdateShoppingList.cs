@@ -4,7 +4,6 @@ namespace test4.Dto
 {
     public class UpdateShoppingList
     {
-        [Key]
         public int SoppingListId { get; set; }
         public string Items { get; set; }
         public int Amount { get; set; }

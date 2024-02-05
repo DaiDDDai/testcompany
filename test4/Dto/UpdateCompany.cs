@@ -7,7 +7,6 @@ namespace test4.Dto
         /// <summary>
         /// 公司ID
         /// </summary>
-        [Key]
         public int CompanyId { get; set; }
         /// <summary>
         /// 公司名稱
