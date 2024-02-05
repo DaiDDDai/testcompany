@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using test4.Dto;
 
 namespace test4.Models
 {
@@ -11,5 +12,12 @@ namespace test4.Models
         public int Money { get; set; }
         public int MemberID { get; set; }
 
+        public void Edit(UpdateShoppingList updatemodel)
+        {
+            Items = updatemodel.Items;
+            Amount = updatemodel.Amount;
+            Money = updatemodel.Money;
+            MemberID = updatemodel.MemberID;
+        }
     }
 }

@@ -69,11 +69,7 @@ namespace test4.Controllers
                 return NotFound(); // 資源不存在
             }
 
-            listudate.SoppingListId = updatemodel.SoppingListId;
-            listudate.Items = updatemodel.Items;
-            listudate.Amount = updatemodel.Amount;
-            listudate.Money = updatemodel.Money;
-            listudate.MemberID = updatemodel.MemberID;
+            listudate.Edit(updatemodel);
 
             _apiDBContext.SaveChanges();
 
