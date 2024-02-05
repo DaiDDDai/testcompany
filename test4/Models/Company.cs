@@ -6,10 +6,22 @@ namespace test4.Models
 {
     public class Company
     {
+        /// <summary>
+        /// 公司ID
+        /// </summary>
         [Key]
         public int CompanyId { get; set; }
+        /// <summary>
+        /// 公司名稱
+        /// </summary>
         public string CompanyName { get; set; }
+        /// <summary>
+        /// 公司電話
+        /// </summary>
         public string CompanyPhone { get; set; }
+        /// <summary>
+        /// 公司地址
+        /// </summary>
         public string CompanyAddress { get; set; }
 
         public void Edit(UpdateCompany updatemodel)
