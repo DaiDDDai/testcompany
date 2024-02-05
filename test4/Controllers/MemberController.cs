@@ -76,11 +76,7 @@ namespace test4.Controllers
                 return NotFound(); // 資源不存在
             }
 
-            listudate.MemberId=updatemodel.MemberId;
-            listudate.PhoneNumber = updatemodel.PhoneNumber;
-            listudate.Address = updatemodel.Address;
-            listudate.Name = updatemodel.Name;
-            listudate.CompanyID = updatemodel.CompanyID;
+            listudate.Edit(updatemodel);
 
             _apiDBContext.SaveChanges();
 

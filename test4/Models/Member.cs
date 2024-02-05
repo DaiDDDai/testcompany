@@ -1,5 +1,6 @@
 ﻿
 using System.ComponentModel.DataAnnotations;
+using test4.Dto;
 
 namespace test4.Models
 {
@@ -13,7 +14,13 @@ namespace test4.Models
 
         public int CompanyID { get; set; }
 
-
+        public void Edit(UpdateMember updatemodel)
+        {
+            Name = updatemodel.Name;
+            PhoneNumber = updatemodel.PhoneNumber;
+            Address = updatemodel.Address;
+            CompanyID = updatemodel.CompanyID;
+        }
 
     }
 
