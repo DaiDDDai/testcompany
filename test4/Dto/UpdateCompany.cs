@@ -22,7 +22,5 @@ namespace test4.Dto
         /// </summary>
         public string CompanyAddress { get; set; }
 
-
-
     }
 }

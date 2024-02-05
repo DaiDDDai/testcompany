@@ -13,10 +13,5 @@ namespace test4.Models
 
         public DbSet<SoppingList> SoppingList { get; set; }
 
-        public DbSet<UpdateCompany> updateCompanies { get; set; }
-
-        public DbSet<UpdateMember> updateMembers { get; set; }
-
-        public DbSet<UpdateShoppingList> updateShoppingLists { get; set; }
     }
 }
